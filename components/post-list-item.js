@@ -25,6 +25,7 @@ class PostListItem extends LitElement {
         display: flex;
         flex-direction: row;
         padding: 0 1rem 0 0;
+        margin: 0 0 2rem 0;
         background-color: #1f2329;
         transition-property: all;
         transition-duration: 400ms;
