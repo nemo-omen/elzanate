@@ -4,11 +4,14 @@
   "description": "Simple blog site made with lit-element and Navigo router. Backed with pouch/couch db.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "es-dev-server --node-resolve --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lit-element": "^2.3.1"
+  },
+  "devDependencies": {
+    "es-dev-server": "^1.55.0"
   }
 }
