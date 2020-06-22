@@ -29,9 +29,9 @@ main {
   justify-content: center;
   align-items: center;
   align-content: center;
-  margin: 1rem 0;
-  border-bottom: 3px solid #ffc200;
-  padding: 0 0 1rem 0;
+  margin: 1rem 0 2rem 0;
+  border-bottom: 2px solid #ffc200;
+  padding: 0 0 2rem 0;
 }
 
 #masthead-logo {
@@ -86,8 +86,9 @@ main {
 }
 
 #page {
-  display: flex;
-  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 3rem;
 }
 
 #page h1, #page h2, #page h3 {
@@ -97,7 +98,7 @@ main {
 }
 
 #content {
-  flex-grow: 8;
+  grid-column: 1/10;
 }
 
 #content h1 {
@@ -107,7 +108,7 @@ main {
 }
 
 #sidebar {
-  flex-grow: 4;
+  grid-column: 10/13;
 }
 
 #sidebar h1 {
