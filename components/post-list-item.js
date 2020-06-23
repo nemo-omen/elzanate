@@ -11,15 +11,29 @@ class PostListItem extends LitElement {
       featuredImage: { type: String },
       content: { type: String },
       slug: { type: String },
-      permalink: { type: String }
+      permalink: { type: String },
+      biolink: { type: String },
     }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.buildBiolink();
+    this.buildPermalink();
+  }
+
+  buildBiolink() {
+    const bylineText = this.byline.toLowerCase();
+    this.biolink = '/authors/' + bylineText.replace(/ /g, '_');
+  }
+
+  buildPermalink() {
+    const headlineText = this.headline.toLowerCase();
+    this.permalink = '/stories/' + headlineText.replace(/ /g, '_').replace(/:/, '').replace(/\?/, '').replace(/\!/, '').replace(/\./, '');
   }
 
   static get styles() {
     return css`
-      :host {
-        cursor: pointer;
-      }
       article {
         font-family: 'IBM Plex Sans';
         display: flex;
@@ -30,14 +44,18 @@ class PostListItem extends LitElement {
         transition-property: all;
         transition-duration: 400ms;
       }
-      article:hover h2 {
-        text-decoration: underline;
+      a {
+        text-decoration: none;
+        color: inherit;
       }
-      article:hover h3, article:hover p {
-        color: #fafafa;
+      div.featured-image {
+        width: 300px;
+        height: 200px;
+        overflow: hidden;
       }
       img {
         max-width: 300px;
+        min-height: 200px;
       }
       .main-section {
         margin: 0 0 0 1rem;
@@ -60,7 +78,7 @@ class PostListItem extends LitElement {
         margin: 0 0 0.5rem 0;
         padding: 0;
         font-weight: 300;
-        font-size: 1.75rem;
+        font-size: 1.5rem;
         color: #0dffe4;
         text-decoration: none;
         transition-property: all;
@@ -72,23 +90,36 @@ class PostListItem extends LitElement {
         font-weight: 400;
         font-size: 1rem;
       }
+      p {
+        margin: 0.25rem 0 0 0;
+      }
     `;
   }
 
   render() {
     return html`
     <article>
-        <img src=${this.featuredImage} alt="${this.headline}">
+      <a href=${this.permalink} class="heature-image-link">
+        <div class="featured-image">
+          <img src=${this.featuredImage} alt="${this.headline}">
+        </div>
+      </a>
       <section class="main-section">
         <header>
-          <h2>${this.headline}</h2>
+          <a href=${this.permalink} class="headline-link">
+            <h2>${this.headline}</h2>
+          </a>
           <section class="subheadline-section">
-            <h3>by ${this.byline}</h3>
+            <a href=${this.biolink} class="bio-link">
+              <h3>by ${this.byline}</h3>
+            </a>
             <h3>${this.dateline}</h3>
           </section>
         </header>
         <section class="content-section">
-          <p>${this.content}</p>
+          <a href=${this.permalink} class="content-link">
+            <p>${this.content}</p>
+          </a>
         </section>
       </section>
     </article>

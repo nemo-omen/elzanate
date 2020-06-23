@@ -19,6 +19,15 @@ const dummyPosts = [
     lastUpdated: 'June 21, 2020, 11:40 p.m.',
     featuredImage: '/assets/images/Great-tailed_Grackle_National_Butterfly_Center_Mission_TX_2018-02-28_15-40-11_(38852714480).jpg',
     content: 'Do the improvements to the residential areas of Lake Nasworthy mean anything for you if you live in Blackshear?'
+  },
+  {
+    postid: '3',
+    headline: "The largest property owner in Downtown San Angelo doesn't pay property taxes",
+    byline: 'Jeff Caldwell',
+    dateline: 'June 22, 2020, 9:09 p.m.',
+    lastUpdated: 'June 22, 2020, 9:09 p.m.',
+    featuredImage: '/assets/images/Great-tailed_Grackle_From_The_Crossley_ID_Guide_Eastern_Birds.jpg',
+    content: 'How the city loses out on millions in revenue from one of its largest property owners.'
   }
 ];
 
@@ -53,7 +62,6 @@ class PostList extends LitElement {
   render() {
     return html`
       ${this.posts.map(post => html`
-      <a href="/">
         <post-list-item
           id=${post.postid}
           .postid=${post.postid}
@@ -65,7 +73,6 @@ class PostList extends LitElement {
           .content=${post.content}
         >
         </post-list-item>
-        </a>
       `)}
     `
   }
