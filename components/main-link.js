@@ -26,7 +26,7 @@ class Link extends navigator(LitElement) {
         text-decoration: underline;
       }
       .bio-link, .content-link {
-        color: #bababa;
+        color: #dadada;
       }
       .bio-link:hover, .content-link:hover {
         color: #fff;
