@@ -8,3 +8,5 @@ class Main extends outlet(LitElement) {
     `;
   }
 }
+
+customElements.define('app-main', Main)

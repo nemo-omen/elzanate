@@ -99,27 +99,29 @@ class PostListItem extends LitElement {
   render() {
     return html`
     <article>
-      <a href=${this.permalink} class="heature-image-link">
+      <main-link href=${this.permalink} linkclass="feature-image-link">
         <div class="featured-image">
           <img src=${this.featuredImage} alt="${this.headline}">
         </div>
-      </a>
+      </main-link>
       <section class="main-section">
         <header>
-          <a href=${this.permalink} class="headline-link">
+          <main-link href=${this.permalink} linkclass="headline-link">
             <h2>${this.headline}</h2>
-          </a>
+          </main-link>
           <section class="subheadline-section">
-            <a href=${this.biolink} class="bio-link">
-              <h3>by ${this.byline}</h3>
-            </a>
+            <h3>
+            <main-link href=${this.biolink} linkclass="bio-link">
+                ${this.byline}
+              </main-link>
+            </h3>
             <h3>${this.dateline}</h3>
           </section>
         </header>
         <section class="content-section">
-          <a href=${this.permalink} class="content-link">
+          <main-link href=${this.permalink} linkclass="content-link">
             <p>${this.content}</p>
-          </a>
+          </main-link>
         </section>
       </section>
     </article>

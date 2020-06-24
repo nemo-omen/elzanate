@@ -2,8 +2,9 @@ import { LitElement, html, css } from 'lit-element';
 import { router } from 'lit-element-router';
 
 import './post-list.js';
+import './about-page.js';
+import './post-page';
 import './main-outlet.js';
-import './main-link.js';
 
 class App extends router(LitElement) {
   static get properties() {
@@ -22,12 +23,11 @@ class App extends router(LitElement) {
       },
       {
         name: 'about',
-        pattern: 'about',
-        data: { title: 'El Zanate | About' }
+        pattern: 'about'
       },
       {
         name: 'post',
-        pattern: 'post/:slug'
+        pattern: 'stories/:slug'
       },
       {
         name: 'author',
@@ -53,12 +53,10 @@ class App extends router(LitElement) {
 
   render() {
     return html`
-    <main-link href="/">Home</main-link>
-    <main-link href="/about">About</main-link>
-
     <app-main active-route=${this.route}>
       <post-list route="home"></post-list>
-      <h1 route="about">About</h1>
+      <about-page route="about"></about-page>
+      <post-page></post-page>
     </app-main>
     `;
   }

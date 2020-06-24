@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit-element';
 import { router } from 'lit-element-router';
+import './components/main-link.js';
 import './components/main-app.js';
 import './components/post-list.js';
 
