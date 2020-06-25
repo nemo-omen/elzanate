@@ -47,6 +47,17 @@ class PostListItem extends LitElement {
       a {
         text-decoration: none;
         color: inherit;
+        font-family: 'IBM Plex Sans';
+      }
+      .headline-link:hover {
+        color: #0dffe4;
+        text-decoration: underline;
+      }
+      .bio-link, .content-link {
+        color: #dadada;
+      }
+      .bio-link:hover, .content-link:hover {
+        color: #fff;
       }
       div.featured-image {
         width: 300px;
@@ -99,29 +110,29 @@ class PostListItem extends LitElement {
   render() {
     return html`
     <article>
-      <main-link href=${this.permalink} linkclass="feature-image-link">
+      <a href=${this.permalink} class="feature-image-link">
         <div class="featured-image">
           <img src=${this.featuredImage} alt="${this.headline}">
         </div>
-      </main-link>
+      </a>
       <section class="main-section">
         <header>
-          <main-link href=${this.permalink} linkclass="headline-link">
+          <a href=${this.permalink} class="headline-link">
             <h2>${this.headline}</h2>
-          </main-link>
+          </a>
           <section class="subheadline-section">
             <h3>
-            <main-link href=${this.biolink} linkclass="bio-link">
+            <a href=${this.biolink} class="bio-link">
                 ${this.byline}
-              </main-link>
+              </a>
             </h3>
             <h3>${this.dateline}</h3>
           </section>
         </header>
         <section class="content-section">
-          <main-link href=${this.permalink} linkclass="content-link">
+          <a href=${this.permalink} class="content-link">
             <p>${this.content}</p>
-          </main-link>
+          </a>
         </section>
       </section>
     </article>
