@@ -22,7 +22,7 @@ class EzApp extends LitElement {
         action: () => { import('./about-page.js'); }
       },
       {
-        path: './stories/:slug',
+        path: './stories/:id',
         component: 'post-page',
         action: () => { import('./post-page.js'); }
       },

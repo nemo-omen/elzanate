@@ -1,6 +1,10 @@
 import { LitElement, html, css } from 'lit-element';
+import { Router } from '@vaadin/router';
 
 class NotFoundPage extends LitElement {
+  firstUpdated() {
+    console.log(this.location.params);
+  }
   render() {
     return html`
     <h1>Oops!</h1>

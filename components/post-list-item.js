@@ -20,6 +20,12 @@ class PostListItem extends LitElement {
     super.connectedCallback();
     this.buildBiolink();
     this.buildPermalink();
+    this.buildSlug();
+  }
+
+  buildSlug() {
+    const headlineText = this.headline.toLowerCase();
+    this.slug = headlineText.replace(/ /g, '_').replace(/:/, '').replace(/\?/, '').replace(/\!/, '').replace(/\./, '');
   }
 
   buildBiolink() {
@@ -117,7 +123,7 @@ class PostListItem extends LitElement {
       </a>
       <section class="main-section">
         <header>
-          <a href=${this.permalink} class="headline-link">
+          <a href="${this.id}" class="headline-link">
             <h2>${this.headline}</h2>
           </a>
           <section class="subheadline-section">
@@ -130,7 +136,7 @@ class PostListItem extends LitElement {
           </section>
         </header>
         <section class="content-section">
-          <a href=${this.permalink} class="content-link">
+          <a href="${this.id}" class="content-link">
             <p>${this.content}</p>
           </a>
         </section>
