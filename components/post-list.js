@@ -37,18 +37,19 @@ class PostList extends LitElement {
 
         html`
           ${this.posts.map(post => html`
-          <post-list-item
-            id=${post.postid}
-            .postid=${post.postid}
-            .headline=${post.headline}
-            .byline=${post.byline}
-            .dateline=${post.dateline}
-            .lastUpdated=${post.lastUpdated}
-            .featuredImage=${post.featuredImage}
-            .content=${post.content}
-          >
-          </post-list-item>
-        `)}
+            <post-list-item
+             id=${post.postid}
+             .postid=${post.postid}
+             .headline=${post.headline}
+             .byline=${post.byline}
+             .dateline=${post.dateline}
+             .lastUpdated=${post.lastUpdated}
+             .featuredImage=${post.featuredImage}
+              .content=${post.content}
+            >
+            </post-list-item>
+          `
+        )}
         `
       )
       }`
