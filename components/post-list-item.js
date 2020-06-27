@@ -3,7 +3,7 @@ import { LitElement, html, css } from 'lit-element';
 class PostListItem extends LitElement {
   static get properties() {
     return {
-      postid: { type: String },
+      _id: { type: String },
       headline: { type: String },
       byline: { type: String },
       dateline: { type: String },
@@ -95,8 +95,8 @@ class PostListItem extends LitElement {
         margin: 0 0 0.5rem 0;
         padding: 0;
         font-weight: 300;
-        font-size: 1.5rem;
         color: #0dffe4;
+        font-size: 1.5rem;
         text-decoration: none;
         transition-property: all;
         transition-duration: 400ms;
@@ -116,14 +116,14 @@ class PostListItem extends LitElement {
   render() {
     return html`
     <article>
-      <a href=${this.permalink} class="feature-image-link">
+      <a href="/stories/${this._id}" class="feature-image-link">
         <div class="featured-image">
           <img src=${this.featuredImage} alt="${this.headline}">
         </div>
       </a>
       <section class="main-section">
         <header>
-          <a href="${this.id}" class="headline-link">
+          <a href="/stories/${this._id}" class="headline-link">
             <h2>${this.headline}</h2>
           </a>
           <section class="subheadline-section">
@@ -136,7 +136,7 @@ class PostListItem extends LitElement {
           </section>
         </header>
         <section class="content-section">
-          <a href="${this.id}" class="content-link">
+          <a href="/stories/${this._id}" class="content-link">
             <p>${this.content}</p>
           </a>
         </section>

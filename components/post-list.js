@@ -14,6 +14,17 @@ class PostList extends LitElement {
     this.posts = [];
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.fetchPosts();
+  }
+
+  async fetchPosts() {
+    const response = await fetch('http://localhost:3000');
+    const jsonResponse = await response.json();
+    this.posts = jsonResponse;
+  }
+
   static get styles() {
     return css`
       h1 {
@@ -28,31 +39,21 @@ class PostList extends LitElement {
 
   render() {
     return html`
-    ${
-      until(
-        fetch('http://localhost:3000')
-          .then(response => response.json())
-          .then((data) => { this.posts = [...data] })
-          .catch((error) => { console.error(error) }),
-
-        html`
-          ${this.posts.map(post => html`
-            <post-list-item
-             id=${post.postid}
-             .postid=${post.postid}
-             .headline=${post.headline}
-             .byline=${post.byline}
-             .dateline=${post.dateline}
-             .lastUpdated=${post.lastUpdated}
-             .featuredImage=${post.featuredImage}
-              .content=${post.content}
-            >
-            </post-list-item>
-          `
-        )}
-        `
-      )
-      }`
+      ${this.posts.map(post => html`
+        <post-list-item
+          id=${post.postid}
+          ._id=${post._id}
+          .headline=${post.headline}
+          .byline=${post.byline}
+          .dateline=${post.dateline}
+          .lastUpdated=${post.lastUpdated}
+          .featuredImage=${post.featuredImage}
+          .content=${post.content}
+        >
+        </post-list-item>
+      `
+    )}
+    `
   }
 
 

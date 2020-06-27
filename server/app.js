@@ -4,49 +4,40 @@ const nano = require('nano')('http://192.168.0.11:5984');
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 const port = 3000;
 
-const posts = nano.db.use('ezposts');
-
-const dummyPosts = [
-	{
-		postid: '1',
-		headline: 'Post one headline: Important things afoot at City Council',
-		byline: 'El Zanate Staff',
-		dateline: 'June 21, 2020, 9:35 p.m.',
-		lastUpdated: 'June 21, 2020, 9:35 p.m.',
-		featuredImage: '/assets/images/Great-tailed_Grackle_67332870.jpg',
-		content: 'Something really big and important happened at 9:30 this evening, Sunday, June 21, 2020.'
-	},
-	{
-		postid: '2',
-		headline: 'What do the improvements to the Lake Nasworthy area mean for you?',
-		byline: 'El Zanate Staff',
-		dateline: 'June 21, 2020, 11:40 p.m.',
-		lastUpdated: 'June 21, 2020, 11:40 p.m.',
-		featuredImage: '/assets/images/Great-tailed_Grackle_National_Butterfly_Center_Mission_TX_2018-02-28_15-40-11_(38852714480).jpg',
-		content: 'Do the improvements to the residential areas of Lake Nasworthy mean anything for you if you live in Blackshear?'
-	},
-	{
-		postid: '3',
-		headline: "The largest property owner in Downtown San Angelo doesn't pay property taxes",
-		byline: 'Jeff Caldwell',
-		dateline: 'June 22, 2020, 9:09 p.m.',
-		lastUpdated: 'June 22, 2020, 9:09 p.m.',
-		featuredImage: '/assets/images/Great-tailed_Grackle_From_The_Crossley_ID_Guide_Eastern_Birds.jpg',
-		content: 'How the city loses out on millions in revenue from one of its largest property owners.'
-	}
-];
+const db = nano.db.use('ezposts');
 
 app.get('/', (req, res) => {
+	console.log(`Request for '${req.path}' recieved.`);
+	console.log('Requesting all docs from db');
 	let posts = [];
-	db.list((error, body) => {
-		body.rows.forEach((doc) => {
-			posts.push(doc);
-		});
-		// res.json(posts);
+	db.list({ include_docs: true }, (error, body) => {
+		if (!error) {
+			body.rows.forEach((data) => posts.push(data.doc));
+			console.log(`DB returned ${body.rows.length} rows.`)
+		} else {
+			console.error('There was an error retrieving from the db: ', err);
+		}
+		res.json(posts);
 	});
-	console.log(posts);
+});
+
+app.get('/stories/:id', (req, res) => {
+	console.log(`Request for ${req.path} recieved.`);
+	const postId = req.params.id;
+	console.log(`Sending request to db for ${postId}`);
+	db.get(postId)
+		.then(body => {
+			if (body) {
+				console.log(`${postId} found. Sending response to client.`)
+				res.json(body);
+				console.log(body);
+			} else {
+				console.log(`${postId} not found on db`);
+			}
+		}).catch(error => { console.error(error) });
 });
 
 app.listen(port, () => console.log(`Server started at http://localhost:${port}`));
